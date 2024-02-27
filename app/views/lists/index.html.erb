@@ -1,9 +1,25 @@
-<h1>Lists#index</h1>
-<ul>
-  <% @lists.each do |list| %>
-    <li><%= link_to list.name, list_path(list) %></li>
-  <% end %>
-</ul>
-<hr>
+<p style="color: green"><%= notice %></p>
 
-<%= link_to "🆕 Add new List", new_list_path %>
+<%= render 'shared/banner' %>
+
+
+<div class="container">
+<h1>Lists</h1>
+
+
+<div class="cards">
+  <% @lists.each do |list| %>
+    <% if list.photo.attached? %>
+      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+          url('<%= url_for list.photo %>')">
+        <%= link_to list.name, list_path(list) %>
+      </div>
+    <% else %>
+      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+          url('<%= url_for @default_url %>')">
+        <%= link_to list.name, list_path(list), class: "text-decoration-none" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+</div>
